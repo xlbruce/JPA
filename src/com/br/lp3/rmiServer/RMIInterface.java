@@ -35,7 +35,7 @@ public interface RMIInterface extends Remote{
     
     public boolean inserirUsuarioJogo(UsuarioJogo usuarioJogo);
     public List<UsuarioJogo> readUsuarioJogo(UsuarioJogo usuarioJogo);
-    public boolean updateUsuarioJogo(UsuarioJogo novo,UsuarioJogo velho);
+    public boolean updateUsuarioJogo(UsuarioJogo novo);
     public boolean removeUsuarioJogo(UsuarioJogo usuarioJogo);
 
 }
