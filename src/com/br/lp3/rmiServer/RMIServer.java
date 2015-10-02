@@ -8,6 +8,7 @@ package com.br.lp3.rmiServer;
 import com.br.lp3.dao.JogoDAO;
 import com.br.lp3.dao.NoticiaJogoDAO;
 import com.br.lp3.dao.UsuarioDAO;
+import com.br.lp3.dao.UsuarioJogoDAO;
 import com.br.lp3.model.Jogo;
 import com.br.lp3.model.NoticiaJogo;
 import com.br.lp3.model.Usuario;
@@ -200,22 +201,44 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     @Override
     public boolean inserirUsuarioJogo(UsuarioJogo usuarioJogo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsuarioJogoDAO dao = new UsuarioJogoDAO();
+        dao.insert(usuarioJogo);
+        return true;
     }
 
     @Override
     public List<UsuarioJogo> readUsuarioJogo(UsuarioJogo usuarioJogo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsuarioJogoDAO dao = new UsuarioJogoDAO();
+
+        List u = dao.read();
+        List novaList = new ArrayList<>();
+        
+        for (Object u1 : u) {
+            UsuarioJogo novoUsuarioJogo = (UsuarioJogo) u1;
+            if (novoUsuarioJogo.getIdUsuario() == usuarioJogo.getIdUsuario()) {
+                novaList.add(novoUsuarioJogo);
+            }
+        }
+
+        if(novaList.size() > 0){
+            return novaList;
+        }
+        
+        return null;
     }
 
     @Override
-    public boolean updateUsuarioJogo(UsuarioJogo novo, UsuarioJogo velho) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateUsuarioJogo(UsuarioJogo novo) {
+        UsuarioJogoDAO dao = new UsuarioJogoDAO();
+        dao.update(novo);
+        return true;
     }
 
     @Override
     public boolean removeUsuarioJogo(UsuarioJogo usuarioJogo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsuarioJogoDAO dao = new UsuarioJogoDAO();
+        dao.remove(usuarioJogo);
+        return true;
     }
 
 }
